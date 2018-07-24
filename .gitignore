@@ -1,3 +1,5 @@
 .idea/
 *.txt
 *.xls
+__pycache__
+*.pyc
