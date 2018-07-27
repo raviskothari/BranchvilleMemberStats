@@ -1,5 +1,6 @@
-from src.ambulance_data.ambulance_drivers_analysis import AmbulanceDriver
-from src.ambulance_data.ambulance_aide_analysis import AmbulanceAide
+from src.ambulance_data.Ambulance_Drivers_Analysis import AmbulanceDriver
+from src.ambulance_data.Ambulance_Aide_Analysis import AmbulanceAide
+from src.models.Member import Member
 
 aide = AmbulanceAide()
 driver = AmbulanceDriver()
@@ -37,3 +38,18 @@ class AmbulanceCrew:
             driver_aide_sorted[k] = v
 
         return driver_aide_sorted
+
+    def construct__list_of_members(self, path_of_file):
+        driver_aide_month_sorted = self.get_aide_driver_totals_for_current_month(path_of_file)
+        driver_aide_year_sorted = self.get_aide_driver_totals_for_year(path_of_file)
+
+        list_of_members = []
+        for k, v in driver_aide_month_sorted.items():
+            member = Member()
+            member.set_member_name(k)
+            member.set_month_call_total(v)
+            year_total = driver_aide_year_sorted.get(k)
+            member.set_year_call_total(year_total)
+            list_of_members.append(member)
+
+        return list_of_members

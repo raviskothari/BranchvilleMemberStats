@@ -1,5 +1,5 @@
-from src.excel.excel_reader import ExcelProcessor
-from src.utilities.get_date import Utils
+from src.excel.Excel_Reader import ExcelProcessor
+from src.utilities.Get_Date import Utils
 
 excelProcessor = ExcelProcessor()
 utils = Utils()

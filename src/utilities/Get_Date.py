@@ -25,3 +25,7 @@ class Utils:
     def get_current_month_mapped():
         today = datetime.now().month
         return map_of_month_to_numerical_value.get(today)
+
+    @staticmethod
+    def get_current_year():
+        return str(datetime.now().year)
