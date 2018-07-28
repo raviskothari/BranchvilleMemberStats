@@ -16,8 +16,3 @@ class S3:
                 print("The object does not exist.")
             else:
                 return
-
-    @staticmethod
-    def write_file_to_s3(file_path, filename):
-        s3 = boto3.client("s3")
-        s3.upload_file(file_path, S3_BUCKET_NAME, filename)

@@ -49,5 +49,3 @@ class AmbulanceAide:
     def get_aide_count_year(self, path_of_file):
         sheet = excelProcessor.open_sheet(path_of_file)
         return self.get_aide_count_in_specified_range(sheet, sheet.nrows)
-
-
