@@ -14,10 +14,16 @@ dynamoDB = DynamoDB()
 excelProcessor = ExcelProcessor()
 utils = Utils()
 
-s3.download_from_s3("AmbulanceRuns.xls", "AmbulanceRuns.xls")
-s3.download_from_s3("EngineRuns.xls", "EngineRuns.xls")
-ambulance_runs = "/Users/RaviKothari/PycharmProjects/BranchvilleAmbulanceStats/src/AmbulanceRuns.xls"
-engine_runs = "/Users/RaviKothari/PycharmProjects/BranchvilleAmbulanceStats/src/EngineRuns.xls"
 
-dynamoDB.put_member_in_dynamo(ambulance_runs, engine_runs)
-excelProcessor.remove_temp_files({"AmbulanceRuns.xls", "EngineRuns.xls"})
+def main():
+    s3.download_from_s3("AmbulanceRuns.xls", "AmbulanceRuns.xls")
+    s3.download_from_s3("EngineRuns.xls", "EngineRuns.xls")
+    ambulance_runs = "/Users/RaviKothari/PycharmProjects/BranchvilleAmbulanceStats/src/AmbulanceRuns.xls"
+    engine_runs = "/Users/RaviKothari/PycharmProjects/BranchvilleAmbulanceStats/src/EngineRuns.xls"
+
+    dynamoDB.put_member_in_dynamo(ambulance_runs, engine_runs)
+    excelProcessor.remove_temp_files({"AmbulanceRuns.xls", "EngineRuns.xls"})
+
+
+if __name__ == '__main__':
+    main()

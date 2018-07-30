@@ -1,9 +1,9 @@
+import boto3
+
 from src.ambulance_data.Ambulance_Crew_Analysis import AmbulanceCrew
+from src.builders.Member_Builder import ConstructMember
 from src.engine_data.Engine_Crew_Analysis import EngineCrew
 from src.utilities.Get_Date import Utils
-from src.utilities.Construct_Member import ConstructMember
-
-import boto3
 
 ambulance_crew = AmbulanceCrew()
 engine_crew = EngineCrew()
