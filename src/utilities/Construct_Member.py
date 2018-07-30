@@ -1,6 +1,7 @@
 from src.ambulance_data.Ambulance_Crew_Analysis import AmbulanceCrew
 from src.engine_data.Engine_Crew_Analysis import EngineCrew
 from src.models.Member import Member
+from collections import Counter
 
 ambulance_crew = AmbulanceCrew()
 engine_crew = EngineCrew()
@@ -14,6 +15,9 @@ class ConstructMember:
         driver_aide_year_sorted = ambulance_crew.get_aide_driver_totals_for_year(path_of_file1)
         driver_oic_month_sorted = engine_crew.get_oic_driver_totals_for_current_month(path_of_file2)
         driver_oic_year_sorted = engine_crew.get_oic_driver_totals_for_year(path_of_file2)
+        ambulance_compensation = Counter(ambulance_crew.calculate_ambulance_compensation(path_of_file1))
+        engine_compensation = Counter(engine_crew.calculate_engine_compensation(path_of_file2))
+        total_member_compensation = ambulance_compensation + engine_compensation
 
         list_of_members_to_create = []
         for k in driver_aide_year_sorted.items():
@@ -37,6 +41,7 @@ class ConstructMember:
             member.set_engine_year_call_total(year_total)
             member.set_ambulance_month_call_total(driver_aide_month_sorted.get(k))
             member.set_ambulance_year_call_total(driver_aide_year_sorted.get(k))
+            member.set_member_compensation(total_member_compensation.get(k))
             list_of_members.append(member)
 
         return list_of_members

@@ -2,6 +2,10 @@ import os
 import sys
 import xlrd
 
+from src.utilities.Get_Date import Utils
+
+util = Utils()
+
 
 class ExcelProcessor:
     @staticmethod
@@ -23,3 +27,19 @@ class ExcelProcessor:
     def remove_temp_files(txt_list):
         for t in txt_list:
             os.remove(t)
+
+    @staticmethod
+    def get_curr_month_range(sheet):
+        last_index = 1
+        for i in range(sheet.ncols):
+            if sheet.cell_value(0, i) == "Incident Number":
+                list_of_incident_numbers = sheet.col_values(i)
+                for j in range(list_of_incident_numbers.__len__()):
+                    if list_of_incident_numbers[j] == "Incident Number":
+                        continue
+                    month_from_invoice_number_full = list_of_incident_numbers[j]
+                    month_from_invoice_number = int(month_from_invoice_number_full[2:4])
+                    if month_from_invoice_number == util.get_current_month_numerical():
+                        last_index = j
+        last_index += 1
+        return last_index

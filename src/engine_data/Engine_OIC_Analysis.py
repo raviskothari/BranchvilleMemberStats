@@ -11,8 +11,8 @@ class EngineOIC:
         oic_unsorted = {}
         for i in range(sheet.ncols):
             if sheet.cell_value(0, i) == "Officer":
-                list_of_oics_full = sheet.col_values(i)
-                list_of_oic = list_of_oics_full[:end_index]
+                list_of_oic_full = sheet.col_values(i)
+                list_of_oic = list_of_oic_full[:end_index]
                 for j in range(list_of_oic.__len__()):
                     if list_of_oic[j] == "Officer":
                         continue
@@ -32,18 +32,7 @@ class EngineOIC:
 
     def get_oic_count_curr_month(self, path_of_file):
         sheet = excelProcessor.open_sheet(path_of_file)
-        last_index = 1
-        for i in range(sheet.ncols):
-            if sheet.cell_value(0, i) == "Incident Number":
-                list_of_invoice_numbers = sheet.col_values(i)
-                for j in range(list_of_invoice_numbers.__len__()):
-                    if list_of_invoice_numbers[j] == "Incident Number":
-                        continue
-                    month_from_invoice_number_full = list_of_invoice_numbers[j]
-                    month_from_invoice_number = int(month_from_invoice_number_full[2:4])
-                    if month_from_invoice_number == utils.get_current_month_numerical():
-                        last_index = j
-        last_index += 1
+        last_index  = excelProcessor.get_curr_month_range(sheet)
         return self.get_oic_count_in_specified_range(sheet, last_index)
 
     def get_oic_count_year(self, path_of_file):

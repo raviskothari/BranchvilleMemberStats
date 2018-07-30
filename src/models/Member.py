@@ -1,11 +1,12 @@
 class Member:
 
     def __init__(self):
+        self.member_name = None
         self.ambulance_year_call_total = None
         self.ambulance_month_call_total = None
         self.engine_year_call_total = None
         self.engine_month_call_total = None
-        self.member_name = None
+        self.member_compensation = None
 
     def get_member_name(self):
         return self.member_name
@@ -48,3 +49,12 @@ class Member:
             self.engine_year_call_total = 0
             return
         self.engine_year_call_total = year_call_total
+
+    def get_member_compensation(self):
+        return "$" + str(self.member_compensation)
+
+    def set_member_compensation(self, member_compensation):
+        if member_compensation is None:
+            self.member_compensation = 0
+            return
+        self.member_compensation = member_compensation

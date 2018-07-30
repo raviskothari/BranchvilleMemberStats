@@ -26,6 +26,7 @@ class DynamoDB:
         header_year_ambulance = "Ambulance Calls For " + utils.get_current_year()
         header_month_engine = "Engine Calls For " + utils.get_current_month_mapped()
         header_year_engine = "Engine Calls For " + utils.get_current_year()
+        header_compensation = "Compensation For " + utils.get_current_month_mapped()
 
         for member in list_of_engine_members:
             DynamoDB.table.put_item(
@@ -34,6 +35,7 @@ class DynamoDB:
                     header_month_ambulance: member.get_ambulance_month_total(),
                     header_year_ambulance: member.get_ambulance_year_total(),
                     header_month_engine: member.get_engine_month_total(),
-                    header_year_engine: member.get_engine_year_total()
+                    header_year_engine: member.get_engine_year_total(),
+                    header_compensation: member.get_member_compensation()
                 }
             )
